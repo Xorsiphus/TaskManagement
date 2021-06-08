@@ -40,7 +40,7 @@ namespace TaskManagement.Data
 
         public async Task<T> Delete<T>(Guid id) where T : class, IEntity
         {
-            var entityForDelete = await _context.Set<T>().Where(e => e.Id == id).FirstOrDefaultAsync();
+            var entityForDelete = await _context.Set<T>().Where(t => t.Id == id).FirstOrDefaultAsync();
             return await Task.Run(() => _context.Set<T>().Remove(entityForDelete).Entity);
         }
         

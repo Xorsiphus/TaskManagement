@@ -34,6 +34,10 @@ namespace TaskManagement.Models.Models
 
         public DateTime CompletionTime { get; set; }
 
+        public int SubTasksPredictTime { get; set; }
+        
+        public int SubTasksCurTime { get; set; }
+
         public Guid? ParentId { get; set; }
 
         public TreeTask Parent { get; set; }
