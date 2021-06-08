@@ -1,0 +1,11 @@
+.idea
+
+
+TaskManagement/bin/
+TaskManagement/obj/
+
+TaskManagement.Data/bin/
+TaskManagement.Data/obj/
+
+TaskManagement.Models/bin/
+TaskManagement.Models/obj/

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement", "TaskManagement\TaskManagement.csproj", "{C5F8E79D-7C1D-4647-A3A8-5BD30932A597}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Data", "TaskManagement.Data\TaskManagement.Data.csproj", "{4F820C0E-DEAE-43FB-875E-8057D2E6DEC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Models", "TaskManagement.Models\TaskManagement.Models.csproj", "{D27AD5D7-EFBC-4DAA-BCD0-0BBF3805F999}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5F8E79D-7C1D-4647-A3A8-5BD30932A597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F8E79D-7C1D-4647-A3A8-5BD30932A597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F8E79D-7C1D-4647-A3A8-5BD30932A597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F8E79D-7C1D-4647-A3A8-5BD30932A597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F820C0E-DEAE-43FB-875E-8057D2E6DEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F820C0E-DEAE-43FB-875E-8057D2E6DEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F820C0E-DEAE-43FB-875E-8057D2E6DEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F820C0E-DEAE-43FB-875E-8057D2E6DEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D27AD5D7-EFBC-4DAA-BCD0-0BBF3805F999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D27AD5D7-EFBC-4DAA-BCD0-0BBF3805F999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D27AD5D7-EFBC-4DAA-BCD0-0BBF3805F999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D27AD5D7-EFBC-4DAA-BCD0-0BBF3805F999}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
