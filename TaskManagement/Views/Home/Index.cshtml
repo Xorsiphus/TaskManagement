@@ -3,14 +3,11 @@
 
     </div>
     <div class="main">
-        <textarea id="screen-json"></textarea>
-        
-        <button class="btn save" onclick="save()">Save</button>
-
+        @{await Html.RenderPartialAsync("_Form");}
     </div>
 </div>
 
 @section scripts
 {
-    <script src="~/js/site.js"></script>
+    <script src="~/js/Tree.js"></script>
 }

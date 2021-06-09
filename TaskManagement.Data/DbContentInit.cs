@@ -22,6 +22,7 @@ namespace TaskManagement.Data
                         Status = TreeTaskStatus.Appointed,
                         PredictRunTime = 123,
                         CurRunTime = 10,
+                        CompletionTime = DateTime.Now.AddMonths(1)
                     },
                     new TaskEntity
                     {
@@ -31,6 +32,7 @@ namespace TaskManagement.Data
                         Status = TreeTaskStatus.Paused,
                         PredictRunTime = 312,
                         CurRunTime = 33,
+                        CompletionTime = DateTime.Now.AddMonths(2)
                     }
                 };
 
@@ -43,6 +45,7 @@ namespace TaskManagement.Data
                     Status = TreeTaskStatus.Completed,
                     PredictRunTime = 55,
                     CurRunTime = 11,
+                    CompletionTime = DateTime.Now.AddDays(5),
                     ParentId = tasks.Find(g => g.Name == "First")?.Id
                 });
                 

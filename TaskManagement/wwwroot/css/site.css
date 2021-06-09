@@ -61,6 +61,8 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  font-size: 32px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .footer {
   position: absolute;
@@ -132,11 +134,11 @@ body {
   padding: 10px;
 }
 
-.unroller {
+.point {
   cursor: pointer;
 }
 
-.unroller:hover {
+.point:hover {
   background-color: gray;
 }
 
@@ -144,7 +146,6 @@ body {
   font-size: 30px;
   -webkit-transition: -webkit-transform .3s;
   transition: -webkit-transform .3s;
-  transition: transform .3s;
   transition: transform .3s, -webkit-transform .3s;
   cursor: pointer;
   content: "+";
@@ -191,17 +192,6 @@ body {
 
 .btn:hover {
   background: #04915d;
-}
-
-#screen-json {
-  width: 85%;
-  height: 75%;
-  resize: none;
-  -webkit-box-shadow: inset 0 0 6px;
-  box-shadow: inset 0 0 6px;
-  font-size: 20px;
-  outline: none;
-  padding: 20px;
 }
 
 .save {
