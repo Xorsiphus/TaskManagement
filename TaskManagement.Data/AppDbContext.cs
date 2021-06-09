@@ -9,7 +9,7 @@ namespace TaskManagement.Data
         {
         }
         
-        public DbSet<TreeTask> TreeTasks { get; set; }
+        public DbSet<TaskEntity> TreeTasks { get; set; }
         
         // protected override void OnModelCreating(ModelBuilder modelBuilder)
         // {

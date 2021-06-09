@@ -19,7 +19,7 @@ namespace TaskManagement.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TaskManagement.Data.Entities.TreeTask", b =>
+            modelBuilder.Entity("TaskManagement.Data.Entities.TaskEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,16 +59,16 @@ namespace TaskManagement.Migrations
                     b.ToTable("TreeTasks");
                 });
 
-            modelBuilder.Entity("TaskManagement.Data.Entities.TreeTask", b =>
+            modelBuilder.Entity("TaskManagement.Data.Entities.TaskEntity", b =>
                 {
-                    b.HasOne("TaskManagement.Data.Entities.TreeTask", "Parent")
+                    b.HasOne("TaskManagement.Data.Entities.TaskEntity", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("TaskManagement.Data.Entities.TreeTask", b =>
+            modelBuilder.Entity("TaskManagement.Data.Entities.TaskEntity", b =>
                 {
                     b.Navigation("Children");
                 });

@@ -10,29 +10,29 @@ using TaskManagement.Models.Models;
 
 namespace TaskManagement.Models.Services
 {
-    public class TreeTaskService : ITreeTaskDao
+    public class TaskService : ITaskDao
     {
         private readonly IDbRepository _service;
         private readonly IMapper _mapper;
 
-        public TreeTaskService(IDbRepository service, IMapper mapper)
+        public TaskService(IDbRepository service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
         }
 
-        public TreeTaskModel Get(Guid id)
+        public TaskModel Get(Guid id)
         {
-            var entity = _service.Get<TreeTask>(t => t.Id == id).FirstOrDefault();
+            var entity = _service.Get<TaskEntity>(t => t.Id == id).FirstOrDefault();
 
-            var model = _mapper.Map<TreeTaskModel>(entity);
+            var model = _mapper.Map<TaskModel>(entity);
 
             return model;
         }
 
-        public async Task<TreeTaskModel> Create(TreeTask task)
+        public async Task<TaskModel> Create(TaskEntity taskEntity)
         {
-            var entity = _mapper.Map<TreeTask>(task);
+            var entity = _mapper.Map<TaskEntity>(taskEntity);
 
             if (entity.ParentId == null)
             {
@@ -40,33 +40,33 @@ namespace TaskManagement.Models.Services
             }
             else
             {
-                var parent = await _service.Get<TreeTask>(t => t.Id == entity.ParentId).FirstOrDefaultAsync();
+                var parent = await _service.Get<TaskEntity>(t => t.Id == entity.ParentId).FirstOrDefaultAsync();
                 parent.Children.Add(entity);
             }
             
             await _service.Save();
 
-            return _mapper.Map<TreeTaskModel>(entity);
+            return _mapper.Map<TaskModel>(entity);
         }
 
-        public async Task<TreeTaskModel> Update(TreeTask task)
+        public async Task<TaskModel> Update(TaskEntity taskEntity)
         {
-            var entity = _mapper.Map<TreeTask>(task);
+            var entity = _mapper.Map<TaskEntity>(taskEntity);
 
             var r = await _service.Update(entity);
             await _service.Save();
 
-            return _mapper.Map<TreeTaskModel>(r);
+            return _mapper.Map<TaskModel>(r);
         }
 
         public async Task<bool> Delete(Guid id)
         {
-            var entity = await _service.Get<TreeTask>(t => t.Id == id).Include(t => t.Children).FirstOrDefaultAsync();
+            var entity = await _service.Get<TaskEntity>(t => t.Id == id).Include(t => t.Children).FirstOrDefaultAsync();
 
             if (entity.Children.Count > 0)
                 return false;
             
-            await _service.Delete<TreeTask>(id);
+            await _service.Delete<TaskEntity>(id);
             await _service.Save();
             return true;
         }

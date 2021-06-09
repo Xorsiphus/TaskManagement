@@ -5,11 +5,11 @@ using TaskManagement.Models.Models;
 
 namespace TaskManagement.Models.DAO
 {
-    public interface ITreeTaskDao
+    public interface ITaskDao
     {
-        TreeTaskModel Get(Guid id);
-        Task<TreeTaskModel> Create(TreeTask task);
-        Task<TreeTaskModel> Update(TreeTask task);
+        TaskModel Get(Guid id);
+        Task<TaskModel> Create(TaskEntity taskEntity);
+        Task<TaskModel> Update(TaskEntity taskEntity);
         Task<bool> Delete(Guid id);
     }
 }

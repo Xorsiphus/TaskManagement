@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using TaskManagement.Data;
 using TaskManagement.Models.DAO;
 using TaskManagement.Models.Services;
@@ -17,7 +18,7 @@ namespace TaskManagement
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
+        }   
 
         public IConfiguration Configuration { get; }
         
@@ -32,7 +33,8 @@ namespace TaskManagement
                 .AddScoped<IDbRepository, DbService>(provider =>
                     new DbService(provider.GetRequiredService<AppDbContext>()));
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddTransient<ITreeTaskDao, TreeTaskService>();
+            services.AddTransient<ITaskDao, TaskService>();
+            services.AddTransient<ITreeItemDao, TreeItemService>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,6 +53,10 @@ namespace TaskManagement
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            using var scope = app.ApplicationServices.CreateScope();
+            AppDbContext context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            DbContentInit.Initial(context);
 
             app.UseEndpoints(endpoints =>
             {

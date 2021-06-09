@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TaskManagement.Data.Constant;
 using TaskManagement.Data.Entities;
 
 namespace TaskManagement.Models.Models
 {
-    public class TreeTaskModel
+    public class TaskModel
     {
-        public TreeTaskModel()
+        public TaskModel()
         {
             ParentId = null;
         }
         
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -22,17 +23,17 @@ namespace TaskManagement.Models.Models
         [Required]
         public string Performers { get; set; }
 
-        public DateTime RegTime { get; set; } = DateTime.Now;
+        public string RegTime { get; set; }
 
         [Required]
-        public TaskStatus Status { get; set; }
+        public TreeTaskStatus Status { get; set; }
 
         [Required]
         public int PredictRunTime { get; set; }
 
         public int CurRunTime { get; set; }
 
-        public DateTime CompletionTime { get; set; }
+        public string CompletionTime { get; set; }
 
         public int SubTasksPredictTime { get; set; }
         
@@ -40,8 +41,8 @@ namespace TaskManagement.Models.Models
 
         public Guid? ParentId { get; set; }
 
-        public TreeTask Parent { get; set; }
+        public TaskEntity Parent { get; set; }
 
-        public IList<TreeTask> Children { get; set; }
+        public IList<TaskEntity> Children { get; set; }
     }
 }

@@ -69,3 +69,142 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+.my_container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+  height: 80vh;
+}
+
+.flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 10px 0 20px 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  background-color: #e7e9eb;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+}
+
+#tree-box {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 350px;
+  flex: 0 0 350px;
+  height: inherit;
+  background-color: #282a35;
+  color: white;
+  overflow: auto;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+}
+
+#tree-box ul {
+  list-style-type: none;
+  -webkit-transition: opacity 500ms ease;
+  transition: opacity 500ms ease;
+}
+
+.treeUL {
+  margin: 10px 30px;
+  padding: 10px;
+}
+
+.unroller {
+  cursor: pointer;
+}
+
+.unroller:hover {
+  background-color: gray;
+}
+
+.before {
+  font-size: 30px;
+  -webkit-transition: -webkit-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  cursor: pointer;
+  content: "+";
+  color: white;
+  display: inline-block;
+  margin-right: 6px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.before:hover {
+  color: #71ce73;
+}
+
+.before-down {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.hidden {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.active {
+  opacity: 1;
+  height: auto;
+}
+
+.btn {
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
+  cursor: pointer;
+  color: #fff;
+  border: 0;
+  background-color: #04AA6D;
+  padding: 2px 30px;
+  border-radius: 5px;
+  font-size: 22px;
+}
+
+.btn:hover {
+  background: #04915d;
+}
+
+#screen-json {
+  width: 85%;
+  height: 75%;
+  resize: none;
+  -webkit-box-shadow: inset 0 0 6px;
+  box-shadow: inset 0 0 6px;
+  font-size: 20px;
+  outline: none;
+  padding: 20px;
+}
+
+.save {
+  margin: 20px 0 0 0;
+  padding: 8px 30px;
+}

@@ -1,8 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="flexbox">
+    <div id="tree-box">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+    <div class="main">
+        <textarea id="screen-json"></textarea>
+        
+        <button class="btn save" onclick="save()">Save</button>
+
+    </div>
 </div>
+
+@section scripts
+{
+    <script src="~/js/site.js"></script>
+}

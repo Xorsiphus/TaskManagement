@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading.Tasks;
+using TaskManagement.Data.Constant;
 
 namespace TaskManagement.Data.Entities
 {
-    public class TreeTask : IEntity
+    public class TaskEntity : IEntity
     {
-        public TreeTask()
+        public TaskEntity()
         {
-            Children = new List<TreeTask>();
+            Children = new List<TaskEntity>();
         }
         
         public Guid Id { get; set; }
@@ -23,7 +22,7 @@ namespace TaskManagement.Data.Entities
         
         public DateTime RegTime { get; set; } = DateTime.Now;
 
-        public TaskStatus Status { get; set; }
+        public TreeTaskStatus Status { get; set; }
 
         public int PredictRunTime { get; set; }
 
@@ -34,8 +33,8 @@ namespace TaskManagement.Data.Entities
         [ForeignKey("TreeTasks")]
         public Guid? ParentId { get; set; }
 
-        public TreeTask Parent { get; set; }
+        public TaskEntity Parent { get; set; }
 
-        public IList<TreeTask> Children { get; set; }
+        public IList<TaskEntity> Children { get; set; }
     }
 }

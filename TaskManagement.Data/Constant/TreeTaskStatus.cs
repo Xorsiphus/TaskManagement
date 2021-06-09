@@ -1,6 +1,6 @@
-﻿namespace TaskManagement.Models.Models
+﻿namespace TaskManagement.Data.Constant
 {
-    public enum TaskStatus
+    public enum TreeTaskStatus
     {
         Appointed,
         InProgress,
