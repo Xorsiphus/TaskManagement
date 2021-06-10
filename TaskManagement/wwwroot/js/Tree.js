@@ -29,7 +29,8 @@ const DrawLayer = (children, ul) => {
 
         const span = document.createElement('span');
         span.setAttribute('class', 'point');
-        span.textContent = children[i].name;
+        span.setAttribute('onclick', 'ShowTaskDetails("' + children[i].id + '");');
+        span.textContent = children[i].name + ': ' +  children[i].status;
 
         if (!children[i].isParent) {
             li.appendChild(span);
@@ -78,6 +79,47 @@ const ShowChildren = (arrow, parentUl, parentId) => {
         },
         error: function (result) {
             console.log(result);
+        }
+    });
+};
+
+const ShowTaskDetails = (taskId) => {
+
+    const inputs = document.querySelectorAll(".form-inputs");
+    const readFields = ["regTime", "subTasksPredictTime", "subTasksCurTime", "completionTime"];
+    
+    $.ajax({
+        url: "https://localhost:5001/api/Task",
+        data: {
+            id: taskId,
+        },
+        type: "GET",
+        contentType: "application/json",
+        success: (data) => {
+            if (data) {
+                if (sessionStorage.getItem("Action") !== "edit"){
+                    const inputs = document.querySelectorAll(".form-inputs");
+                    for (let i = 0; i < inputs.length; i++){
+                        inputs[i].disabled = false;
+                        if (readFields.indexOf(inputs[i].id) > -1)
+                            inputs[i].readOnly = true;
+                    }
+                    sessionStorage.setItem('Action', "edit");
+                }
+                
+                for(let i = 0; i < inputs.length; i++){
+                    inputs[i].value = data[inputs[i].id];
+                }
+
+                document.getElementById("taskLabel").innerText = data.name;
+                
+                sessionStorage.setItem('TaskId', taskId);
+                sessionStorage.setItem('TaskStatus', data.status);
+                sessionStorage.setItem('TaskParentId', data.parentId);
+            }
+        },
+        error: function (result) {
+            alert(result);
         }
     });
 };

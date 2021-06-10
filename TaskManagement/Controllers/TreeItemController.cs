@@ -5,6 +5,7 @@ using TaskManagement.Models.DAO;
 
 namespace TaskManagement.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class TreeItemController
     {

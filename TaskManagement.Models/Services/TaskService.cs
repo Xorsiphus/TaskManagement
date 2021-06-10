@@ -21,18 +21,18 @@ namespace TaskManagement.Models.Services
             _mapper = mapper;
         }
 
-        public TaskModel Get(Guid id)
+        public async Task<TaskModel> Get(Guid id)
         {
-            var entity = _service.Get<TaskEntity>(t => t.Id == id).FirstOrDefault();
+            var entity = await _service.Get<TaskEntity>(t => t.Id == id).FirstOrDefaultAsync();
 
             var model = _mapper.Map<TaskModel>(entity);
 
             return model;
         }
 
-        public async Task<TaskModel> Create(TaskEntity taskEntity)
+        public async Task<TaskModel> Create(TaskModel taskModel)
         {
-            var entity = _mapper.Map<TaskEntity>(taskEntity);
+            var entity = _mapper.Map<TaskEntity>(taskModel);
 
             if (entity.ParentId == null)
             {
@@ -49,9 +49,9 @@ namespace TaskManagement.Models.Services
             return _mapper.Map<TaskModel>(entity);
         }
 
-        public async Task<TaskModel> Update(TaskEntity taskEntity)
+        public async Task<TaskModel> Update(TaskModel taskModel)
         {
-            var entity = _mapper.Map<TaskEntity>(taskEntity);
+            var entity = _mapper.Map<TaskEntity>(taskModel);
 
             var r = await _service.Update(entity);
             await _service.Save();

@@ -7,9 +7,9 @@ namespace TaskManagement.Models.DAO
 {
     public interface ITaskDao
     {
-        TaskModel Get(Guid id);
-        Task<TaskModel> Create(TaskEntity taskEntity);
-        Task<TaskModel> Update(TaskEntity taskEntity);
+        Task<TaskModel> Get(Guid id);
+        Task<TaskModel> Create(TaskModel taskModel);
+        Task<TaskModel> Update(TaskModel taskModel);
         Task<bool> Delete(Guid id);
     }
 }

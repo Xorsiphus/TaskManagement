@@ -13,8 +13,11 @@ namespace TaskManagement.Profile
                 .ForMember(d => d.RegTime, opt => opt.MapFrom(e => e.RegTime.ToString("G")))
                 .ForMember(d => d.CompletionTime, opt => opt.MapFrom(e => e.CompletionTime.ToString("G")));
 
-            CreateMap<TaskModel, TaskEntity>().ForMember(d => d.CompletionTime,
-                opt => opt.MapFrom(m => DateTime.Parse(m.CompletionTime)));
+            CreateMap<TaskModel, TaskEntity>()
+                .ForMember(d => d.RegTime,
+                opt => opt.MapFrom(m => DateTime.Now))
+                .ForMember(d => d.CompletionTime,
+                    opt => opt.MapFrom(m => DateTime.Now.AddHours(m.PredictRunTime)));
             
             CreateMap<TaskEntity, TreeItemModel>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(e => e.Id.ToString()))
@@ -23,10 +26,10 @@ namespace TaskManagement.Profile
                 {
                     d.Status = source.Status switch
                     {
-                        TreeTaskStatus.Appointed => "1",
-                        TreeTaskStatus.InProgress => "2",
-                        TreeTaskStatus.Paused => "3",
-                        TreeTaskStatus.Completed => "0",
+                        TreeTaskStatus.Appointed => "★",
+                        TreeTaskStatus.InProgress => "▶",
+                        TreeTaskStatus.Paused => "◷",
+                        TreeTaskStatus.Completed => "✓",
                         _ => "",
                     };
                     if (source.Children.Count > 0)

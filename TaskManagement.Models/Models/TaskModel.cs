@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TaskManagement.Data.Constant;
-using TaskManagement.Data.Entities;
 
 namespace TaskManagement.Models.Models
 {
@@ -13,7 +12,8 @@ namespace TaskManagement.Models.Models
             ParentId = null;
         }
         
-        public string Id { get; set; }
+        [BindNever]
+        public Guid Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -22,7 +22,7 @@ namespace TaskManagement.Models.Models
 
         [Required]
         public string Performers { get; set; }
-
+        
         public string RegTime { get; set; }
 
         [Required]
@@ -31,8 +31,9 @@ namespace TaskManagement.Models.Models
         [Required]
         public int PredictRunTime { get; set; }
 
+        [Required]
         public int CurRunTime { get; set; }
-
+        
         public string CompletionTime { get; set; }
 
         public int SubTasksPredictTime { get; set; }
@@ -40,9 +41,7 @@ namespace TaskManagement.Models.Models
         public int SubTasksCurTime { get; set; }
 
         public Guid? ParentId { get; set; }
-
-        public TaskEntity Parent { get; set; }
-
-        public IList<TaskEntity> Children { get; set; }
+        //
+        // public IList<TaskModel> Children { get; set; }
     }
 }

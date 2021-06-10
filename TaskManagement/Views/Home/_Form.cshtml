@@ -1,19 +1,48 @@
-﻿<div>
+﻿<script src="@Url.Content("~/js/Form.js")" type="text/javascript"></script>
 
-    <legend>Контактная информация</legend>
-    <p>
-        <label for="name">Имя <em>*</em></label><input type="text" id="name">
+<div id="taskEditor">
+    <legend>
+        Информация о задаче: <bold id="taskLabel"></bold>
+    </legend>
+    <p class="form-elements">
+        <label for="name">Название: </label>
+        <input type="text" class="form-inputs" id="name">
     </p>
-    <p>
-        <label for="email">E-mail</label><input type="email" id="email">
+    <p class="form-elements">
+        <label for="description">Описание: </label>
+        <input type="text" class="form-inputs" id="description">
     </p>
-    <p>
-        <input type="submit" value="Отправить">
+    <p class="form-elements">
+        <label for="performers">Исполнители: </label>
+        <input type="text" class="form-inputs" id="performers">
     </p>
-    <button class="btn save" onclick="save">Save</button>
+    <p class="form-elements">
+        <label for="regTime">Время создания: </label>
+        <input type="text" class="form-inputs" id="regTime" readonly>
+    </p>
+    <p class="form-elements">
+        <label for="predictRunTime">Ожидаемое время выполнения задачи(в часах): </label>
+        <input type="number" class="form-inputs" id="predictRunTime">
+    </p>
+    <p class="form-elements">
+        <label for="curRunTime">Текущее время выполнения задачи(в часах): </label>
+        <input type="number" class="form-inputs" id="curRunTime">
+    </p>
+    <p class="form-elements">
+        <label for="subTasksPredictTime">Ожидаемое время выполнения подзадач(в часах): </label>
+        <input type="number" class="form-inputs" id="subTasksPredictTime" readonly>
+    </p>
+    <p class="form-elements">
+        <label for="subTasksCurTime">Текущее время выполнения подзадач(в часах): </label>
+        <input type="number" class="form-inputs" id="subTasksCurTime" readonly>
+    </p>
+    <p class="form-elements">
+        <label for="completionTime">Прогнозируемое время завершения: </label>
+        <input type="text" class="form-inputs" id="completionTime" readonly>
+    </p>
+
+    <button class="btn create" onclick="createTask(true)">Сreate main task</button>
+    <button class="btn create" onclick="createTask(false)">Create subtask</button>
+    <button class="btn save" onclick="updateTask()">Save</button>
+    <button class="btn remove" onclick="updateTask()">Remove</button>
 </div>
-
-@section scripts
-{
-    <script src="~/js/Form.js"></script>
-}
