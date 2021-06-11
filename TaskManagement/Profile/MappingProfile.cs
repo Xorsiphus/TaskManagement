@@ -15,10 +15,10 @@ namespace TaskManagement.Profile
 
             CreateMap<TaskModel, TaskEntity>()
                 .ForMember(d => d.RegTime,
-                opt => opt.MapFrom(m => DateTime.Now))
+                    opt => opt.MapFrom(m => m.RegTime == null ? DateTime.Now : DateTime.Parse(m.RegTime)))
                 .ForMember(d => d.CompletionTime,
-                    opt => opt.MapFrom(m => DateTime.Now.AddHours(m.PredictRunTime)));
-            
+                    opt => opt.MapFrom(m => DateTime.Now.AddHours(m.PredictRunTime + m.SubTasksPredictTime)));
+
             CreateMap<TaskEntity, TreeItemModel>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(e => e.Id.ToString()))
                 .ForMember(d => d.Parent, opt => opt.MapFrom(e => e.ParentId == null ? "" : e.ParentId.ToString()))

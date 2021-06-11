@@ -18,7 +18,7 @@ namespace TaskManagement.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> GetTree(Guid id)
+        public async Task<IActionResult> GetTask(Guid id)
         {
             var task = await _service.Get(id);
             return new OkObjectResult(task);
@@ -36,6 +36,13 @@ namespace TaskManagement.Controllers
         {
             var updatedTask = await _service.Update(task);
             return new OkObjectResult(updatedTask);
+        }
+        
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTask([FromBody]Guid id)
+        {
+            var status = await _service.Delete(id);
+            return new OkObjectResult(status);
         }
         
     }

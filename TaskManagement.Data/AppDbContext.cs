@@ -11,13 +11,12 @@ namespace TaskManagement.Data
         
         public DbSet<TaskEntity> TreeTasks { get; set; }
         
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     modelBuilder.Entity<Task>()
-        //         .HasOne(p => p.ParentObjective)
-        //         .WithMany(p => p.SubObjectives)
-        //         .HasForeignKey(p => p.ParentId);
-        //     base.OnModelCreating(modelBuilder);
-        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TaskEntity>()
+                .HasOne(p => p.Parent)
+                .WithMany(p => p.Children);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

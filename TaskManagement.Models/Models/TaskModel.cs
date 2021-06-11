@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using TaskManagement.Data.Constant;
@@ -41,7 +42,8 @@ namespace TaskManagement.Models.Models
         public int SubTasksCurTime { get; set; }
 
         public Guid? ParentId { get; set; }
-        //
-        // public IList<TaskModel> Children { get; set; }
+        
+        [BindNever]
+        public IList<TaskModel> Children { get; set; }
     }
 }

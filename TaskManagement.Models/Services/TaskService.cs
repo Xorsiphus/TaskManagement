@@ -14,20 +14,42 @@ namespace TaskManagement.Models.Services
     {
         private readonly IDbRepository _service;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
-        public TaskService(IDbRepository service, IMapper mapper)
+        public TaskService(IDbRepository service, IMapper mapper, AppDbContext context)
         {
             _service = service;
             _mapper = mapper;
+            _context = context;
         }
 
         public async Task<TaskModel> Get(Guid id)
         {
-            var entity = await _service.Get<TaskEntity>(t => t.Id == id).FirstOrDefaultAsync();
+            var entity = await _service
+                .Get<TaskEntity>(t => t.Id == id)
+                .Include(t => t.Children)
+                .FirstOrDefaultAsync();
 
             var model = _mapper.Map<TaskModel>(entity);
 
+            model.SubTasksPredictTime = CalculateSubPredicted(model) - model.PredictRunTime;
+            model.SubTasksCurTime = CalculateSubCurrent(model) - model.CurRunTime;
+
             return model;
+        }
+        
+        private TaskEntity RecursiveLoad(TaskEntity parent)
+        {
+            var parentFromDatabase = _context
+                .Entry(parent)
+                .Collection(d=>d.Children);
+   
+            foreach (var child in parent.Children)
+            {
+                _context.Entry(child).Reference(d=>d.Children).Load();
+                RecursiveLoad(child);
+            }
+            return parentFromDatabase;
         }
 
         public async Task<TaskModel> Create(TaskModel taskModel)
@@ -43,7 +65,7 @@ namespace TaskManagement.Models.Services
                 var parent = await _service.Get<TaskEntity>(t => t.Id == entity.ParentId).FirstOrDefaultAsync();
                 parent.Children.Add(entity);
             }
-            
+
             await _service.Save();
 
             return _mapper.Map<TaskModel>(entity);
@@ -65,10 +87,20 @@ namespace TaskManagement.Models.Services
 
             if (entity.Children.Count > 0)
                 return false;
-            
+
             await _service.Delete<TaskEntity>(id);
             await _service.Save();
             return true;
+        }
+
+        private static int CalculateSubPredicted(TaskModel model)
+        {
+            return model.PredictRunTime + model.Children.Sum(m => CalculateSubPredicted(m));
+        }
+        
+        private static int CalculateSubCurrent(TaskModel model)
+        {
+            return model.CurRunTime + model.Children.Sum(CalculateSubCurrent);
         }
     }
 }

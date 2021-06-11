@@ -1,5 +1,13 @@
 ﻿"use strict"
 
+const getTaskId = (context) => {
+    return context.parentElement.id;
+};
+
+const getParentUl = (context) => {
+    return context.parentElement.children[2];
+};
+
 
 $(document).ready(() => {
     $.ajax({
@@ -25,11 +33,12 @@ const DrawLayer = (children, ul) => {
     for (let i = 0; i < children.length; i++) {
 
         const li = document.createElement('li');
+        li.setAttribute("id", children[i].id)
         ul.appendChild(li);
 
         const span = document.createElement('span');
         span.setAttribute('class', 'point');
-        span.setAttribute('onclick', 'ShowTaskDetails("' + children[i].id + '");');
+        span.setAttribute('onclick', 'ShowTaskDetails(this);');
         span.textContent = children[i].name + ': ' +  children[i].status;
 
         if (!children[i].isParent) {
@@ -38,8 +47,7 @@ const DrawLayer = (children, ul) => {
         }
 
         const before = document.createElement('span');
-        before.setAttribute('onclick', 'ShowChildren(this, this.parentElement.children[2], "'
-            + children[i].id + '");');
+        before.setAttribute('onclick', 'ShowChildren(this);');
         before.setAttribute('class', 'before');
         before.textContent = "❯";
         li.appendChild(before);
@@ -51,10 +59,13 @@ const DrawLayer = (children, ul) => {
     }
 }
 
+// arrow, parentUl, parentId
+const ShowChildren = (context) => {
 
-const ShowChildren = (arrow, parentUl, parentId) => {
+    const parentId = getTaskId(context);
+    const parentUl = getParentUl(context);
 
-    arrow.classList.toggle("before-down");
+    context.classList.toggle("before-down");
 
     if (parentUl.classList.contains("active")) {
         while (parentUl.firstChild) {
@@ -83,11 +94,13 @@ const ShowChildren = (arrow, parentUl, parentId) => {
     });
 };
 
-const ShowTaskDetails = (taskId) => {
+const ShowTaskDetails = (context) => {
+    
+    const taskId = getTaskId(context);
 
     const inputs = document.querySelectorAll(".form-inputs");
     const readFields = ["regTime", "subTasksPredictTime", "subTasksCurTime", "completionTime"];
-    
+
     $.ajax({
         url: "https://localhost:5001/api/Task",
         data: {
@@ -97,22 +110,22 @@ const ShowTaskDetails = (taskId) => {
         contentType: "application/json",
         success: (data) => {
             if (data) {
-                if (sessionStorage.getItem("Action") !== "edit"){
+                if (sessionStorage.getItem("Action") !== "Edit"){
                     const inputs = document.querySelectorAll(".form-inputs");
                     for (let i = 0; i < inputs.length; i++){
                         inputs[i].disabled = false;
                         if (readFields.indexOf(inputs[i].id) > -1)
                             inputs[i].readOnly = true;
                     }
-                    sessionStorage.setItem('Action', "edit");
+                    sessionStorage.setItem('Action', "Edit");
                 }
-                
+
                 for(let i = 0; i < inputs.length; i++){
                     inputs[i].value = data[inputs[i].id];
                 }
 
                 document.getElementById("taskLabel").innerText = data.name;
-                
+
                 sessionStorage.setItem('TaskId', taskId);
                 sessionStorage.setItem('TaskStatus', data.status);
                 sessionStorage.setItem('TaskParentId', data.parentId);
