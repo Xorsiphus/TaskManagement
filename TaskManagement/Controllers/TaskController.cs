@@ -25,7 +25,7 @@ namespace TaskManagement.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> AddMainTask(TaskModel task)
+        public async Task<IActionResult> AddTask(TaskModel task)
         {
             var updatedTask = await _service.Create(task);
             return new OkObjectResult(updatedTask);
