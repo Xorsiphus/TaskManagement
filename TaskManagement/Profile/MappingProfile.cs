@@ -17,7 +17,7 @@ namespace TaskManagement.Profile
                 .ForMember(d => d.RegTime,
                     opt => opt.MapFrom(m => m.RegTime == null ? DateTime.Now : DateTime.Parse(m.RegTime)))
                 .ForMember(d => d.CompletionTime,
-                    opt => opt.MapFrom(m => DateTime.Now.AddHours(m.PredictRunTime + m.SubTasksPredictTime)));
+                    opt => opt.MapFrom(m => DateTime.Parse(m.RegTime).AddHours(m.PredictRunTime + m.SubTasksPredictTime)));
 
             CreateMap<TaskEntity, TreeItemModel>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(e => e.Id.ToString()))

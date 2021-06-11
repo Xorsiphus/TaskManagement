@@ -14,21 +14,20 @@ namespace TaskManagement.Models.Services
     {
         private readonly IDbRepository _service;
         private readonly IMapper _mapper;
-        private readonly AppDbContext _context;
 
-        public TaskService(IDbRepository service, IMapper mapper, AppDbContext context)
+        public TaskService(IDbRepository service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
-            _context = context;
         }
 
         public async Task<TaskModel> Get(Guid id)
         {
             var entity = await _service
                 .Get<TaskEntity>(t => t.Id == id)
-                .Include(t => t.Children)
                 .FirstOrDefaultAsync();
+            
+            _service.LoadChildrenRecursively(entity);
 
             var model = _mapper.Map<TaskModel>(entity);
 
@@ -36,20 +35,6 @@ namespace TaskManagement.Models.Services
             model.SubTasksCurTime = CalculateSubCurrent(model) - model.CurRunTime;
 
             return model;
-        }
-        
-        private TaskEntity RecursiveLoad(TaskEntity parent)
-        {
-            var parentFromDatabase = _context
-                .Entry(parent)
-                .Collection(d=>d.Children);
-   
-            foreach (var child in parent.Children)
-            {
-                _context.Entry(child).Reference(d=>d.Children).Load();
-                RecursiveLoad(child);
-            }
-            return parentFromDatabase;
         }
 
         public async Task<TaskModel> Create(TaskModel taskModel)

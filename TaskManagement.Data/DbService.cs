@@ -16,6 +16,18 @@ namespace TaskManagement.Data
             _context = context;
         }
 
+        public void LoadChildrenRecursively<T>(T parent) where T : TaskEntity
+        {
+            _context.Entry(parent)
+                .Collection(t => t.Children)
+                .Load();
+
+            foreach (var child in parent.Children)
+            {
+                LoadChildrenRecursively(child);
+            }
+        }
+
         public IQueryable<T> Get<T>() where T : class, IEntity
         {
             return _context.Set<T>().AsQueryable();

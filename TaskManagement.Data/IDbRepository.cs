@@ -8,6 +8,8 @@ namespace TaskManagement.Data
 {
     public interface IDbRepository
     {
+        public void LoadChildrenRecursively<T>(T parent) where T : TaskEntity;
+        
         IQueryable<T> Get<T>() where T : class, IEntity;
         
         IQueryable<T> Get<T>(Expression<Func<T, bool>> expression) where T : class, IEntity;
