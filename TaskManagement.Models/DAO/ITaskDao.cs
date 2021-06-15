@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using TaskManagement.Data.Entities;
 using TaskManagement.Models.Models;
 
 namespace TaskManagement.Models.DAO

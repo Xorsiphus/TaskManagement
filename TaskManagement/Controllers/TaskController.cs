@@ -21,6 +21,8 @@ namespace TaskManagement.Controllers
         public async Task<IActionResult> GetTask(Guid id)
         {
             var task = await _service.Get(id);
+            if (task == null)
+                return new ObjectResult(new { error = "Невозможно получить объект!" });
             return new OkObjectResult(task);
         }
         
@@ -28,6 +30,8 @@ namespace TaskManagement.Controllers
         public async Task<IActionResult> AddTask(TaskModel task)
         {
             var updatedTask = await _service.Create(task);
+            if (updatedTask == null)
+                return new ObjectResult(new { error = "Невозможно создать объект!" });
             return new OkObjectResult(updatedTask);
         }
 
@@ -35,6 +39,8 @@ namespace TaskManagement.Controllers
         public async Task<IActionResult> UpdateTask(TaskModel task)
         {
             var updatedTask = await _service.Update(task);
+            if (updatedTask == null)
+                return new ObjectResult(new { error = "Невозможно обновить статус!" });
             return new OkObjectResult(updatedTask);
         }
         

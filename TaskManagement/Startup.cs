@@ -29,6 +29,7 @@ namespace TaskManagement
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("TaskManagement"));
+                // options.EnableSensitiveDataLogging();
             });
             services
                 .AddScoped<IDbRepository, DbService>(provider =>

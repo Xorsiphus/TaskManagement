@@ -1,4 +1,6 @@
-﻿const intProps = ["predictRunTime", "curRunTime", "subTasksPredictTime", "subTasksCurTime"];
+﻿"use strict"
+
+const intProps = ["predictRunTime", "curRunTime", "subTasksPredictTime", "subTasksCurTime"];
 
 const treeDfs = (parent, id, callback) => {
 
@@ -28,9 +30,12 @@ const resolveStatus = (statusCode) => {
 const createMainTask = () => {
 
     const inputs = document.querySelectorAll(".form-inputs");
+    const radioButtons = document.querySelectorAll(".from-radio-button");
     const uselessFields = ["status", "regTime", "subTasksPredictTime", "subTasksCurTime", "completionTime"];
 
     if (sessionStorage.getItem("Action") !== "CreateMain") {
+        
+        sessionStorage.removeItem("TaskId");
 
         for (let i = 0; i < inputs.length; i++) {
             document.getElementById("taskLabel").innerText = "";
@@ -38,6 +43,12 @@ const createMainTask = () => {
             inputs[i].readOnly = false;
             if (uselessFields.indexOf(inputs[i].id) > -1)
                 inputs[i].disabled = true;
+        }
+
+        for (let i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].disabled = true;
+            if (radioButtons[i].checked)
+                radioButtons[i].checked = false;
         }
     } else {
 
@@ -96,7 +107,6 @@ const createMainTask = () => {
 const createSubTask = () => {
 
     const inputs = document.querySelectorAll(".form-inputs");
-
     const parentId = sessionStorage.getItem("TaskId");
 
     if (!parentId) {
@@ -180,7 +190,6 @@ const createSubTask = () => {
 const updateTask = () => {
 
     const taskId = sessionStorage.getItem("TaskId");
-    const taskStatus = sessionStorage.getItem("TaskStatus");
     const taskParentId = sessionStorage.getItem("TaskParentId");
 
     if (!taskId) {
@@ -190,7 +199,6 @@ const updateTask = () => {
 
     let data = {
         id: taskId,
-        status: parseInt(taskStatus, 10),
         parentId: taskParentId === "null" ? null : taskParentId
     };
 
@@ -203,12 +211,26 @@ const updateTask = () => {
             data[inputs[i].id] = inputs[i].value;
     }
 
+    if (document.getElementById("statusAppointed").checked)
+        data["status"] = 0;
+    if (document.getElementById("statusInProgress").checked)
+        data["status"] = 1;
+    if (document.getElementById("statusPaused").checked)
+        data["status"] = 2;
+    if (document.getElementById("statusCompleted").checked)
+        data["status"] = 3;
+
     $.ajax({
         url: "https://localhost:5001/api/Task",
         data: JSON.stringify(data),
         type: "PUT",
         contentType: "application/json",
         success: (reqData) => {
+            if (reqData.error !== undefined) {
+                alert(reqData.error);
+                return;
+            }
+
             for (let i = 0; i < inputs.length; i++) {
                 inputs[i].value = reqData[inputs[i].id];
             }
@@ -220,12 +242,20 @@ const updateTask = () => {
             const callback = (arg) => result = arg;
             treeDfs(ul, taskId, callback);
 
+
             if (result.children !== undefined)
-                for (let i = 0; i < result.children.length; i++)
-                    if (result.children[i].classList.contains("point")) {
+                for (let i = 0; i < result.children.length; i++) {
+                    if (result.children[i].classList.contains("point"))
                         result.children[i].textContent = reqData.name + ': ' + resolveStatus(reqData.status);
-                        break;
+                    if (result.children[i].classList.contains("before-down"))
+                        result.children[i].classList.toggle("before-down");
+                    if (result.children[i].classList.contains("active")) {
+                        result.children[i].classList.toggle("active");
+                        while (result.children[i].firstChild) {
+                            result.children[i].removeChild(result.children[i].firstChild);
+                        }
                     }
+                }
 
             alert("Задача обновлена!");
         },
@@ -253,8 +283,8 @@ const removeTask = () => {
         contentType: "application/json",
         success: (reqData) => {
             console.log(reqData);
-            
-            if (reqData){
+
+            if (reqData) {
                 for (let i = 0; i < inputs.length; i++) {
                     inputs[i].value = "";
                 }

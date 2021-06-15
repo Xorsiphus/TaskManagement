@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Data;
+using TaskManagement.Data.Constant;
 using TaskManagement.Data.Entities;
 using TaskManagement.Models.DAO;
 using TaskManagement.Models.Models;
@@ -26,13 +28,17 @@ namespace TaskManagement.Models.Services
             var entity = await _service
                 .Get<TaskEntity>(t => t.Id == id)
                 .FirstOrDefaultAsync();
-            
+
+            if (entity == null)
+                return null;
+
             _service.LoadChildrenRecursively(entity);
 
             var model = _mapper.Map<TaskModel>(entity);
 
             model.SubTasksPredictTime = CalculateSubPredicted(model) - model.PredictRunTime;
             model.SubTasksCurTime = CalculateSubCurrent(model) - model.CurRunTime;
+            model.Children = null;
 
             return model;
         }
@@ -43,7 +49,8 @@ namespace TaskManagement.Models.Services
 
             if (entity.ParentId == null)
             {
-                await _service.Add(entity);
+                if (await _service.Add(entity) == null)
+                    return null;
             }
             else
             {
@@ -58,14 +65,66 @@ namespace TaskManagement.Models.Services
 
         public async Task<TaskModel> Update(TaskModel taskModel)
         {
-            var entity = _mapper.Map<TaskEntity>(taskModel);
+            var entity = await _service.Get<TaskEntity>(t => t.Id == taskModel.Id).FirstOrDefaultAsync();
 
-            var r = await _service.Update(entity);
-            await _service.Save();
-
-            return _mapper.Map<TaskModel>(r);
+            return (entity.Status, taskModel.Status) switch
+            {
+                (TreeTaskStatus.Appointed, TreeTaskStatus.Appointed) => await DoUpdate(entity, taskModel),
+                (TreeTaskStatus.InProgress, TreeTaskStatus.InProgress) => await DoUpdate(entity, taskModel),
+                (TreeTaskStatus.Paused, TreeTaskStatus.Paused) => await DoUpdate(entity, taskModel),
+                // (TreeTaskStatus.Completed, TreeTaskStatus.Completed) => await DoUpdate(entity, taskModel),
+                (TreeTaskStatus.Appointed, TreeTaskStatus.InProgress) => await DoUpdate(entity, taskModel),
+                (TreeTaskStatus.InProgress, TreeTaskStatus.Paused) => await DoUpdate(entity, taskModel),
+                (TreeTaskStatus.Paused, TreeTaskStatus.InProgress) => await DoUpdate(entity, taskModel),
+                (TreeTaskStatus.InProgress, TreeTaskStatus.Completed) => await DoUpdate(entity, taskModel),
+                _ => null
+            };
         }
 
+        private async Task<TaskModel> DoUpdate(TaskEntity entity, TaskModel model)
+        {
+            _mapper.Map(model, entity);
+            
+            _service.LoadChildrenRecursively(entity);
+            
+            if (model.Status == TreeTaskStatus.Completed && TryCompleteTask(entity))
+            {
+                entity.CompletionTime = DateTime.Now;
+                entity.CurRunTime = Convert.ToInt32((entity.CompletionTime - entity.RegTime).TotalHours);
+                
+                model.CompletionTime = DateTime.Now.ToString("G");
+                model.CurRunTime = entity.CurRunTime;
+                
+                DoCompleteTask(entity);
+            }
+
+            await _service.Save();
+
+            return model;
+        }
+        
+        private static bool TryCompleteTask(TaskEntity entity)
+        {
+            foreach (var child in entity.Children)
+            {
+                if (child.Status == TreeTaskStatus.Appointed || 
+                    child.Status == TreeTaskStatus.Paused)
+                    return false;
+                if (!TryCompleteTask(child))
+                    return false;
+            }
+            return true;
+        }
+
+        private static void DoCompleteTask(TaskEntity entity)
+        {
+            foreach (var child in entity.Children)
+            {
+                child.Status = TreeTaskStatus.Completed;
+                DoCompleteTask(child);
+            }
+        }
+        
         public async Task<bool> Delete(Guid id)
         {
             var entity = await _service.Get<TaskEntity>(t => t.Id == id).Include(t => t.Children).FirstOrDefaultAsync();
@@ -82,7 +141,7 @@ namespace TaskManagement.Models.Services
         {
             return model.PredictRunTime + model.Children.Sum(m => CalculateSubPredicted(m));
         }
-        
+
         private static int CalculateSubCurrent(TaskModel model)
         {
             return model.CurRunTime + model.Children.Sum(CalculateSubCurrent);
