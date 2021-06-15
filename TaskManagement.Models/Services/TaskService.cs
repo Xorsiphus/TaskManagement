@@ -55,6 +55,8 @@ namespace TaskManagement.Models.Services
             else
             {
                 var parent = await _service.Get<TaskEntity>(t => t.Id == entity.ParentId).FirstOrDefaultAsync();
+                if (parent == null)
+                    return null;
                 parent.Children.Add(entity);
             }
 
@@ -67,6 +69,9 @@ namespace TaskManagement.Models.Services
         {
             var entity = await _service.Get<TaskEntity>(t => t.Id == taskModel.Id).FirstOrDefaultAsync();
 
+            if (entity == null)
+                return null;
+            
             return (entity.Status, taskModel.Status) switch
             {
                 (TreeTaskStatus.Appointed, TreeTaskStatus.Appointed) => await DoUpdate(entity, taskModel),

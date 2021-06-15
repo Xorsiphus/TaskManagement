@@ -16,6 +16,11 @@ $(document).ready(() => {
         contentType: "application/json",
         success: (data) => {
             if (data) {
+                if (data.error !== undefined) {
+                    alert(data.error);
+                    return;
+                }
+                
                 const ul = document.createElement('ul');
                 ul.setAttribute('class', 'treeUL');
                 DrawLayer(data, ul);
@@ -39,7 +44,6 @@ const DrawLayer = (children, ul) => {
 
         const span = document.createElement('span');
         span.setAttribute('class', 'point');
-        // span.setAttribute('onclick', 'ShowTaskDetails(this);');
         span.addEventListener("click", ShowTaskDetails);
         span.textContent = children[i].name + ': ' +  children[i].status;
 
@@ -86,6 +90,11 @@ const ShowChildren = (mouseEvent) => {
         contentType: "application/json",
         success: (data) => {
             if (data) {
+                if (data.error !== undefined) {
+                    alert(data.error);
+                    return;
+                }
+                
                 parentUl.classList.toggle("active");
                 DrawLayer(data, parentUl);
             }
@@ -112,6 +121,11 @@ const ShowTaskDetails = (mouseEvent) => {
         contentType: "application/json",
         success: (data) => {
             if (data) {
+                if (data.error !== undefined) {
+                    alert(data.error);
+                    return;
+                }
+                
                 if (sessionStorage.getItem("Action") !== "Edit"){
                     const inputs = document.querySelectorAll(".form-inputs");
                     const radioButtons = document.querySelectorAll(".from-radio-button");

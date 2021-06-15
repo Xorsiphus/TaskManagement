@@ -20,15 +20,18 @@ namespace TaskManagement.Controllers
         public async Task<IActionResult> GetTree()
         {
             var root = await _service.GetRoot();
-            return new OkObjectResult(root);
+            return root == null
+                ? new ObjectResult(new {error = "Не удалось загузить список!"})
+                : new OkObjectResult(root);
         }
-        
+
         [HttpGet("Children")]
         public async Task<IActionResult> GetChildren(Guid id)
         {
             var root = await _service.GetChildren(id);
-            return new OkObjectResult(root);
+            return root == null
+                ? new ObjectResult(new {error = "Не удалось загузить подзадачи!"})
+                : new OkObjectResult(root);
         }
-        
     }
 }

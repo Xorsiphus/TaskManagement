@@ -81,6 +81,11 @@ const createMainTask = () => {
             type: "POST",
             contentType: "application/json",
             success: (reqData) => {
+                if (reqData.error !== undefined) {
+                    alert(reqData.error);
+                    return;
+                }
+                
                 let tree = document.querySelectorAll(".treeUL");
                 let ul = tree[0];
 
@@ -143,7 +148,12 @@ const createSubTask = () => {
             data: JSON.stringify(data),
             type: "POST",
             contentType: "application/json",
-            success: () => {
+            success: (reqData) => {
+                if (reqData.error !== undefined) {
+                    alert(reqData.error);
+                    return;
+                }
+                
                 let tree = document.querySelectorAll(".treeUL");
                 let ul = tree[0];
 
@@ -282,7 +292,10 @@ const removeTask = () => {
         type: "DELETE",
         contentType: "application/json",
         success: (reqData) => {
-            console.log(reqData);
+            if (reqData.error !== undefined) {
+                alert(reqData.error);
+                return;
+            }
 
             if (reqData) {
                 for (let i = 0; i < inputs.length; i++) {

@@ -16,40 +16,39 @@ namespace TaskManagement.Controllers
         {
             _service = service;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetTask(Guid id)
         {
             var task = await _service.Get(id);
-            if (task == null)
-                return new ObjectResult(new { error = "Невозможно получить объект!" });
-            return new OkObjectResult(task);
+            return task == null
+                ? new ObjectResult(new {error = "Невозможно получить объект!"})
+                : new OkObjectResult(task);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> AddTask(TaskModel task)
         {
             var updatedTask = await _service.Create(task);
-            if (updatedTask == null)
-                return new ObjectResult(new { error = "Невозможно создать объект!" });
-            return new OkObjectResult(updatedTask);
+            return updatedTask == null
+                ? new ObjectResult(new {error = "Невозможно создать объект!"})
+                : new OkObjectResult(updatedTask);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateTask(TaskModel task)
         {
             var updatedTask = await _service.Update(task);
-            if (updatedTask == null)
-                return new ObjectResult(new { error = "Невозможно обновить статус!" });
-            return new OkObjectResult(updatedTask);
+            return updatedTask == null
+                ? new ObjectResult(new {error = "Невозможно обновить объект!"})
+                : new OkObjectResult(updatedTask);
         }
-        
+
         [HttpDelete]
-        public async Task<IActionResult> DeleteTask([FromBody]Guid id)
+        public async Task<IActionResult> DeleteTask([FromBody] Guid id)
         {
             var status = await _service.Delete(id);
             return new OkObjectResult(status);
         }
-        
     }
 }

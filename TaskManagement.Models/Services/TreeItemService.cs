@@ -24,6 +24,10 @@ namespace TaskManagement.Models.Services
         public async Task<List<TreeItemModel>> GetRoot()
         {
             var entities = await _service.Get<TaskEntity>(t => t.ParentId == null).Include(t => t.Children).ToListAsync();
+
+            if (entities == null)
+                return null;
+            
             var items = _mapper.Map<List<TreeItemModel>>(entities);
             return items;
         }
@@ -31,6 +35,10 @@ namespace TaskManagement.Models.Services
         public async Task<List<TreeItemModel>> GetChildren(Guid id)
         {
             var entities = await _service.Get<TaskEntity>(t => t.ParentId == id).Include(t => t.Children).ToListAsync();
+           
+            if (entities == null)
+                return null;
+            
             var items = _mapper.Map<List<TreeItemModel>>(entities);
             return items;
         }
