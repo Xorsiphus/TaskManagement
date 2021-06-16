@@ -27,7 +27,7 @@ const resolveStatus = (statusCode) => {
     }
 };
 
-const createMainTask = () => {
+const createMainTask = (successMessage) => {
 
     const inputs = document.querySelectorAll(".form-inputs");
     const radioButtons = document.querySelectorAll(".from-radio-button");
@@ -99,6 +99,8 @@ const createMainTask = () => {
 
                 ul.appendChild(li);
                 li.appendChild(span);
+
+                alert(successMessage);
             },
             error: function (result) {
                 console.log(result);
@@ -109,13 +111,13 @@ const createMainTask = () => {
     sessionStorage.setItem("Action", "CreateMain");
 };
 
-const createSubTask = () => {
+const createSubTask = (successMessage, errorMessage) => {
 
     const inputs = document.querySelectorAll(".form-inputs");
     const parentId = sessionStorage.getItem("TaskId");
 
     if (!parentId) {
-        alert("Необходимо выбрать задачу - родителя");
+        alert(errorMessage);
         return;
     }
 
@@ -176,7 +178,7 @@ const createSubTask = () => {
                         }
                     }
 
-                alert("Подадача создана!");
+                alert(successMessage);
 
                 if (flag) return;
 
@@ -197,13 +199,13 @@ const createSubTask = () => {
     }
 };
 
-const updateTask = () => {
+const updateTask = (successMessage, errorMessage) => {
 
     const taskId = sessionStorage.getItem("TaskId");
     const taskParentId = sessionStorage.getItem("TaskParentId");
 
     if (!taskId) {
-        alert("Необходимо выбрать задачу");
+        alert(errorMessage);
         return;
     }
 
@@ -267,7 +269,7 @@ const updateTask = () => {
                     }
                 }
 
-            alert("Задача обновлена!");
+            alert(successMessage);
         },
         error: function (result) {
             console.log(result);
@@ -275,12 +277,12 @@ const updateTask = () => {
     });
 };
 
-const removeTask = () => {
+const removeTask = (successMessage, choiceErrorMessage, subErrorMessage) => {
 
     const taskId = sessionStorage.getItem("TaskId");
 
     if (!taskId) {
-        alert("Необходимо выбрать задачу");
+        alert(choiceErrorMessage);
         return;
     }
 
@@ -323,9 +325,9 @@ const removeTask = () => {
                 li.remove();
 
                 document.getElementById("taskLabel").innerText = "";
-                alert("Задача удалена!");
+                alert(successMessage);
             } else {
-                alert("У этой задачи есть подзадачи!");
+                alert(subErrorMessage);
             }
         },
         error: function (result) {

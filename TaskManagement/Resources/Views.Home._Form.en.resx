@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="TaskInfoLabel" xml:space="preserve">
+        <value>Task Info:</value>
+    </data>
+    <data name="TaskName" xml:space="preserve">
+        <value>Name:</value>
+    </data>
+    <data name="TaskDescription" xml:space="preserve">
+        <value>Description</value>
+    </data>
+    <data name="TaskPerformers" xml:space="preserve">
+        <value>Performers:</value>
+    </data>
+    <data name="TaskRegTime" xml:space="preserve">
+        <value>Time of creation:</value>
+    </data>
+    <data name="TaskStatus" xml:space="preserve">
+        <value>Status</value>
+    </data>
+    <data name="TaskStatusAppointed" xml:space="preserve">
+        <value>Appointed</value>
+    </data>
+    <data name="TaskStatusInProgress" xml:space="preserve">
+        <value>In Progress</value>
+    </data>
+    <data name="TaskStatusPaused" xml:space="preserve">
+        <value>Paused</value>
+    </data>
+    <data name="TaskStatusCompleted" xml:space="preserve">
+        <value>Completed</value>
+    </data>
+    <data name="TaskPredictRunTime" xml:space="preserve">
+        <value>Estimated time to complete the task (in hours):</value>
+    </data>
+    <data name="TaskCurRunTime" xml:space="preserve">
+        <value>Current task execution time (in hours):</value>
+    </data>
+    <data name="TaskSubTasksPredictTime" xml:space="preserve">
+        <value>Estimated time to complete subtasks (in hours):</value>
+    </data>
+    <data name="TaskSubTasksCurTime" xml:space="preserve">
+        <value>Current execution time of subtasks (in hours):</value>
+    </data>
+    <data name="TaskCompletionTime" xml:space="preserve">
+        <value>Predicted completion time:</value>
+    </data>
+    <data name="CreateMainTaskButton" xml:space="preserve">
+        <value>Сreate main task</value>
+    </data>
+    <data name="CreateSubTaskButton" xml:space="preserve">
+        <value>Create subtask</value>
+    </data>
+    <data name="SaveTaskChangesButton" xml:space="preserve">
+        <value>Save</value>
+    </data>
+    <data name="RemoveTaskButton" xml:space="preserve">
+        <value>Remove</value>
+    </data>
+    <data name="CreateMainTaskAlert" xml:space="preserve">
+        <value>Task created!</value>
+    </data>
+    <data name="CreateSubTaskAlert" xml:space="preserve">
+        <value>Subtask created!</value>
+    </data>
+    <data name="CreateSubTaskErrorAlert" xml:space="preserve">
+        <value>It is necessary to choose the task - the parent!</value>
+    </data>
+    <data name="SaveTaskChangesErrorAlert" xml:space="preserve">
+        <value>You must select a task!</value>
+    </data>
+    <data name="SaveTaskChangesAlert" xml:space="preserve">
+        <value>The task has been updated!</value>
+    </data>
+    <data name="RemoveTaskAlert" xml:space="preserve">
+        <value>The task has been deleted!</value>
+    </data>
+    <data name="RemoveTaskSubTasksErrorAlert" xml:space="preserve">
+        <value>This task has subtasks!</value>
+    </data>
+    <data name="RemoveTaskChoiceErrorAlert" xml:space="preserve">
+        <value>You must select a task!</value>
+    </data>
+</root>

@@ -1,9 +1,12 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using TaskManagement.Data;
 using TaskManagement.Models.DAO;
@@ -24,7 +27,8 @@ namespace TaskManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddControllersWithViews().AddViewLocalization();
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
@@ -40,6 +44,18 @@ namespace TaskManagement
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "ASP.NETCoreApi", Version = "v1"});
+            });
+            
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("ru")
+                };
+                options.DefaultRequestCulture = new RequestCulture("en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
             });
         }
 
@@ -64,7 +80,9 @@ namespace TaskManagement
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            var localizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
+            app.UseRequestLocalization(localizationOptions);
 
             using var scope = app.ApplicationServices.CreateScope();
             AppDbContext context = scope.ServiceProvider.GetRequiredService<AppDbContext>();

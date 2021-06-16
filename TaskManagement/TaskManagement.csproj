@@ -31,4 +31,46 @@
       <Content Remove="wwwroot\js\site.js" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views.Home._Form.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Views.Home._Form.ru.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views.Home._Form.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Views.Home._Form.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers.TaskController.ru.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Controllers.TaskController.ru.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Controllers.TaskController.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Controllers.TaskController.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Views.Home._Form.ru.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Views.Home._Form.ru.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views.Home._Form.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Views.Home._Form.en.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers.TaskController.ru.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Controllers.TaskController.ru.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Controllers.TaskController.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Controllers.TaskController.en.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

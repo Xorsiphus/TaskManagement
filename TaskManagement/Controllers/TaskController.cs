@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using TaskManagement.Models.DAO;
 using TaskManagement.Models.Models;
 
@@ -11,10 +12,12 @@ namespace TaskManagement.Controllers
     public class TaskController : Controller
     {
         private readonly ITaskDao _service;
+        private readonly IStringLocalizer<TaskController> _localizer;
 
-        public TaskController(ITaskDao service)
+        public TaskController(ITaskDao service, IStringLocalizer<TaskController> localizer)
         {
             _service = service;
+            _localizer = localizer;
         }
 
         [HttpGet]
@@ -22,7 +25,7 @@ namespace TaskManagement.Controllers
         {
             var task = await _service.Get(id);
             return task == null
-                ? new ObjectResult(new {error = "Невозможно получить объект!"})
+                ? new ObjectResult(new {error = _localizer["ControllerGetTaskError"] })
                 : new OkObjectResult(task);
         }
 
@@ -31,7 +34,7 @@ namespace TaskManagement.Controllers
         {
             var updatedTask = await _service.Create(task);
             return updatedTask == null
-                ? new ObjectResult(new {error = "Невозможно создать объект!"})
+                ? new ObjectResult(new {error = _localizer["ControllerAddTaskError"] })
                 : new OkObjectResult(updatedTask);
         }
 
@@ -40,7 +43,7 @@ namespace TaskManagement.Controllers
         {
             var updatedTask = await _service.Update(task);
             return updatedTask == null
-                ? new ObjectResult(new {error = "Невозможно обновить объект!"})
+                ? new ObjectResult(new {error = _localizer["ControllerUpdateTaskError"] })
                 : new OkObjectResult(updatedTask);
         }
 

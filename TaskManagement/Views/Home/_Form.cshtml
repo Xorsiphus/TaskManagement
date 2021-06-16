@@ -1,55 +1,58 @@
-﻿<script src="@Url.Content("~/js/Form.js")" type="text/javascript"></script>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<script src="@Url.Content("~/js/Form.js")" type="text/javascript"></script>
 
 <div id="taskEditor">
     <legend>
-        Информация о задаче: <bold id="taskLabel"></bold>
+        @Localizer["TaskInfoLabel"] <bold id="taskLabel"></bold>
     </legend>
     <p class="form-elements">
-        <label for="name">Название: </label>
+        <label for="name">@Localizer["TaskName"] </label>
         <input type="text" class="form-inputs" id="name">
     </p>
     <p class="form-elements">
-        <label for="description">Описание: </label>
+        <label for="description">@Localizer["TaskDescription"] </label>
         <input type="text" class="form-inputs" id="description">
     </p>
     <p class="form-elements">
-        <label for="performers">Исполнители: </label>
+        <label for="performers">@Localizer["TaskPerformers"] </label>
         <input type="text" class="form-inputs" id="performers">
     </p>
     <p class="form-elements">
-        <label for="regTime">Время создания: </label>
+        <label for="regTime">@Localizer["TaskRegTime"] </label>
         <input type="text" class="form-inputs" id="regTime" readonly>
     </p>
     <p class="form-status-labels-container">
-        <label for="statusAppointed">Статус: </label>
-        <label for="statusAppointed"><input class="from-radio-button" type="radio" id="statusAppointed" name="status">Appointed</label>
-        <label for="statusInProgress"><input class="from-radio-button" type="radio" id="statusInProgress" name="status">In Progress</label>
-        <label for="statusPaused"><input class="from-radio-button" type="radio" id="statusPaused" name="status">Paused</label>
-        <label for="statusCompleted"><input class="from-radio-button" type="radio" id="statusCompleted" name="status">Completed</label>
+        <label for="statusAppointed">@Localizer["TaskStatus"] </label>
+        <label for="statusAppointed"><input class="from-radio-button" type="radio" id="statusAppointed" name="status">@Localizer["TaskStatusAppointed"]</label>
+        <label for="statusInProgress"><input class="from-radio-button" type="radio" id="statusInProgress" name="status">@Localizer["TaskStatusInProgress"]</label>
+        <label for="statusPaused"><input class="from-radio-button" type="radio" id="statusPaused" name="status">@Localizer["TaskStatusPaused"]</label>
+        <label for="statusCompleted"><input class="from-radio-button" type="radio" id="statusCompleted" name="status">@Localizer["TaskStatusCompleted"]</label>
     </p>
     <p class="form-elements">
-        <label for="predictRunTime">Ожидаемое время выполнения задачи(в часах): </label>
+        <label for="predictRunTime">@Localizer["TaskPredictRunTime"] </label>
         <input type="number" class="form-inputs" id="predictRunTime">
     </p>
     <p class="form-elements">
-        <label for="curRunTime">Текущее время выполнения задачи(в часах): </label>
+        <label for="curRunTime">@Localizer["TaskCurRunTime"] </label>
         <input type="number" class="form-inputs" id="curRunTime">
     </p>
     <p class="form-elements">
-        <label for="subTasksPredictTime">Ожидаемое время выполнения подзадач(в часах): </label>
+        <label for="subTasksPredictTime">@Localizer["TaskSubTasksPredictTime"] </label>
         <input type="number" class="form-inputs" id="subTasksPredictTime" readonly>
     </p>
     <p class="form-elements">
-        <label for="subTasksCurTime">Текущее время выполнения подзадач(в часах): </label>
+        <label for="subTasksCurTime">@Localizer["TaskSubTasksCurTime"] </label>
         <input type="number" class="form-inputs" id="subTasksCurTime" readonly>
     </p>
     <p class="form-elements">
-        <label for="completionTime">Прогнозируемое время завершения: </label>
+        <label for="completionTime">@Localizer["TaskCompletionTime"] </label>
         <input type="text" class="form-inputs" id="completionTime" readonly>
     </p>
 
-    <button class="btn create" onclick="createMainTask()">Сreate main task</button>
-    <button class="btn create" onclick="createSubTask()">Create subtask</button>
-    <button class="btn save" onclick="updateTask()">Save</button>
-    <button class="btn remove" onclick="removeTask()">Remove</button>
+    <button class="btn create" onclick='createMainTask("@Localizer["CreateMainTaskAlert"]")'>@Localizer["CreateMainTaskButton"]</button>
+    <button class="btn create" onclick='createSubTask("@Localizer["CreateSubTaskAlert"]", "@Localizer["CreateSubTaskErrorAlert"]")'>@Localizer["CreateSubTaskButton"]</button>
+    <button class="btn save" onclick='updateTask("@Localizer["SaveTaskChangesAlert"]", "@Localizer["SaveTaskChangesErrorAlert"]")'>@Localizer["SaveTaskChangesButton"]</button>
+    <button class="btn remove" onclick='removeTask("@Localizer["RemoveTaskAlert"]", "@Localizer["RemoveTaskChoiceErrorAlert"]", "@Localizer["RemoveTaskSubTasksErrorAlert"]")'>@Localizer["RemoveTaskButton"]</button>
 </div>

@@ -1,2 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=D27AD5D7_002DEFBC_002D4DAA_002DBCD0_002D0BBF3805F999_002Fd_003AServices_002Ff_003ATaskService_002Ecs/@EntryIndexedValue">ForceIncluded</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=D27AD5D7_002DEFBC_002D4DAA_002DBCD0_002D0BBF3805F999_002Fd_003AServices_002Ff_003ATaskService_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=TaskManagement_002FResources_002FControllers_002ETaskController/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=TaskManagement_002FResources_002FViews_002EHome_002E_005FForm/@EntryIndexedValue">True</s:Boolean>
+	
+	
+	
+	
+	<s:String x:Key="/Default/ResxEditorPersonal/DisabledLanguages/@EntryValue">default-language</s:String>
+	
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean></wpf:ResourceDictionary>
