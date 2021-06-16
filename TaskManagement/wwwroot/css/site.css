@@ -2,230 +2,231 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-  font-family: 'Source Sans Pro', sans-serif;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  margin-top: 20px;
-  line-height: 45px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    margin-top: 20px;
+    line-height: 45px; /* Vertically center the text there */
 }
 
-
 .my_container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 30px;
-  height: 900px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+    height: 900px;
 }
 
 .flexbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 .main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  padding: 10px 0 20px 0;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
-  background-color: #e7e9eb;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 10px 0 20px 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    background-color: #e7e9eb;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
 }
 
 #tree-box {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 350px;
-  flex: 0 0 350px;
-  height: inherit;
-  background-color: #282a35;
-  color: white;
-  overflow: auto;
-  font-size: 18px;
-  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 350px;
+    flex: 0 0 350px;
+    height: inherit;
+    background-color: #282a35;
+    color: white;
+    overflow: auto;
+    font-size: 18px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.37);
 }
 
 #tree-box ul {
-  list-style-type: none;
-  -webkit-transition: opacity 500ms ease;
-  transition: opacity 500ms ease;
+    list-style-type: none;
+    -webkit-transition: opacity 500ms ease;
+    transition: opacity 500ms ease;
 }
 
 .treeUL {
-  margin: 10px 30px;
-  padding: 10px;
+    margin: 10px 30px;
+    padding: 10px;
 }
 
 .point {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .point:hover {
-  background-color: gray;
+    background-color: gray;
 }
 
 .before {
-  font-size: 15px;
-  -webkit-transition: -webkit-transform .3s;
-  transition: -webkit-transform .3s;
-  transition: transform .3s, -webkit-transform .3s;
-  cursor: pointer;
-  content: "+";
-  color: white;
-  display: inline-block;
-  margin-right: 6px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    font-size: 15px;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+    cursor: pointer;
+    content: "+";
+    color: white;
+    display: inline-block;
+    margin-right: 6px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .before:hover {
-  color: #71ce73;
+    color: #71ce73;
 }
 
 .before-down {
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 .hidden {
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
 }
 
 .active {
-  opacity: 1;
-  height: auto;
+    opacity: 1;
+    height: auto;
 }
 
 .btn {
-  -webkit-transition: background-color .3s;
-  transition: background-color .3s;
-  cursor: pointer;
-  border: 0;
-  border-radius: 5px;
-  font-size: 22px;
-  margin-right: 7px;
-  margin-left: 7px;
-  padding: 8px 30px;
-  color: #fff;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    font-size: 22px;
+    margin-right: 7px;
+    margin-left: 7px;
+    padding: 8px 30px;
+    color: #fff;
 }
 
 .save {
-  background-color: #04AA6D;
+    background-color: #04AA6D;
 }
 
 .create {
-  background-color: #e0a800;
+    background-color: #e0a800;
 }
 
 .remove {
-  background-color: #a71d2a;
+    background-color: #a71d2a;
 }
 
 .save:hover {
-  background-color: #04915d;
+    background-color: #04915d;
 }
 
 .create:hover {
-  background-color: #af8607;
+    background-color: #af8607;
 }
 
 .remove:hover {
-  background-color: #7d1620;
+    background-color: #7d1620;
 }
 
 .form-inputs {
-  flex: 1;
-  width: 100%;
+    flex: 1;
+    width: 100%;
 }
 
 .form-status-labels-container {
-  display: flex;
-  flex: 0.8;
-  justify-content: space-between;
+    display: flex;
+    flex: 0.8;
+    justify-content: space-between;
 }
 
 .form-legend {
@@ -233,9 +234,9 @@ body {
 }
 
 .from-radio-button {
-  
+
 }
 
 .form-elements {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
