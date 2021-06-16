@@ -18,13 +18,10 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="ControllerGetTaskError" xml:space="preserve">
-        <value>Невозможно получить объект!</value>
+    <data name="ControllerGetTreeError" xml:space="preserve">
+        <value>Не удалось загузить список!</value>
     </data>
-    <data name="ControllerAddTaskError" xml:space="preserve">
-        <value>Невозможно добавить объект!</value>
-    </data>
-    <data name="ControllerUpdateTaskError" xml:space="preserve">
-        <value>Невозможно обновить объект!</value>
+    <data name="ControllerGetTreeChildrenError" xml:space="preserve">
+        <value>Не удалось загузить подзадачи!</value>
     </data>
 </root>

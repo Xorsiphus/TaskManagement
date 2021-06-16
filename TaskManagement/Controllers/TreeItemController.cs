@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using TaskManagement.Models.DAO;
 
 namespace TaskManagement.Controllers
@@ -10,10 +11,12 @@ namespace TaskManagement.Controllers
     public class TreeItemController
     {
         private readonly ITreeItemDao _service;
+        private readonly IStringLocalizer<TreeItemController> _localizer; 
 
-        public TreeItemController(ITreeItemDao service)
+        public TreeItemController(ITreeItemDao service, IStringLocalizer<TreeItemController> localizer)
         {
             _service = service;
+            _localizer = localizer;
         }
 
         [HttpGet("Tree")]
@@ -21,7 +24,7 @@ namespace TaskManagement.Controllers
         {
             var root = await _service.GetRoot();
             return root == null
-                ? new ObjectResult(new {error = "Не удалось загузить список!"})
+                ? new ObjectResult(new {error = _localizer["ControllerGetTreeError"] })
                 : new OkObjectResult(root);
         }
 
@@ -30,7 +33,7 @@ namespace TaskManagement.Controllers
         {
             var root = await _service.GetChildren(id);
             return root == null
-                ? new ObjectResult(new {error = "Не удалось загузить подзадачи!"})
+                ? new ObjectResult(new {error = _localizer["ControllerGetTreeChildrenError"] })
                 : new OkObjectResult(root);
         }
     }
